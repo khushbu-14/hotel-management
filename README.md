@@ -1,4 +1,4 @@
-# hotel-management
+# Hotel-Management
 HOTEL MANAGEMENT
 
 SUMMARY: 
