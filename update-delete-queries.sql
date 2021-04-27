@@ -1,0 +1,33 @@
+set serveroutput on;
+
+create or replace 
+procedure  update_email(new_email in varchar2, id1 in varchar2)
+as
+begin
+dbms_output.put_line('Updating Email');
+update guest 
+set  email= new_email  where guest_id = id1;
+commit;
+dbms_output.put_line('Update Complete');
+end;
+/
+
+exec update_email('johnny@gmail.com',8);
+exec update_email('abc@gmail.com',2);
+
+
+--select * from guest;
+
+set serveroutput on;
+
+create or replace 
+procedure  delete_location
+as
+begin
+dbms_output.put_line('Deleting Booking');
+delete from Location
+where location_id not in (select location_id from hotel);
+commit;
+dbms_output.put_line('Delete Complete');
+end;
+/
