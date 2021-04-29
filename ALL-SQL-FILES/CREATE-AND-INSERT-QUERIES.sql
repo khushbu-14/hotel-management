@@ -1972,11 +1972,13 @@ CREATE OR REPLACE
             BKNG_START_DATE IN DATE,
             BKNG_END_DATE IN DATE
     )
-    is B_TOTAL_AMOUNT NUMBER := 0;
-         
-   BEGIN
-            dbms_output.put_line('----------------------------------------------------------');
+    
+    as B_TOTAL_AMOUNT NUMBER := 0;
+    
+    begin
+                dbms_output.put_line('----------------------------------------------------------');
     BEGIN
+    
         B_TOTAL_AMOUNT := GET_BOOKING_AMOUNT(
             ROOM_TYP_ID,
             NO_OF_ROOM,
@@ -1987,13 +1989,12 @@ CREATE OR REPLACE
             BKNG_START_DATE,
             BKNG_END_DATE
         );
-
         exception
-             WHEN OTHERS THEN
-             B_TOTAL_AMOUNT := 0;
-    END;
+                     WHEN OTHERS THEN
+                     B_TOTAL_AMOUNT := 0;
+        end;
 
-    dbms_output.put_line('-- before insert -- ');
+    --dbms_output.put_line('-- before insert -- ');
      insert into ROOM_BOOKING(
         BKNG_ID, 
         GUEST_ID, 
@@ -2018,7 +2019,7 @@ CREATE OR REPLACE
         NO_OF_ROOM,
         BKNG_START_DATE, 
         BKNG_END_DATE);
-        
+
              dbms_output.put_line('Row inserted at ROOM BOOKING table');
              dbms_output.put_line('----------------------------------------------------------');
             commit;
@@ -2034,12 +2035,14 @@ CREATE OR REPLACE
                     dbms_output.put_line(dbms_utility.format_error_stack);
                     dbms_output.put_line('----------------------------------------------------------');
             end insrt_room_booking;
-     /
+/
      
 EXECUTE insrt_room_booking(1,2,2,4,5,2,2,2,TO_DATE('2021/04/28', 'YYYY-MM-DD'),TO_DATE('2021/05/03','YYYY-MM-DD'));
 EXECUTE insrt_room_booking(2,2,3,2,5,2,2,2,TO_DATE('2021/05/02', 'YYYY-MM-DD'),TO_DATE('2021/05/05','YYYY-MM-DD'));
 EXECUTE insrt_room_booking(3,1,3,2,5,2,1,1,TO_DATE('2021/04/25', 'YYYY-MM-DD'),TO_DATE('2021/04/30','YYYY-MM-DD'));
 EXECUTE insrt_room_booking(4,1,3,2,5,2,2,1,TO_DATE('2021/04/26', 'YYYY-MM-DD'),TO_DATE('2021/04/30','YYYY-MM-DD'));
+
+---------------------------------------------------- Room Checkin -------------------------------------------
 
 create or replace procedure checkin_creation is
     table_name varchar2(4000);
