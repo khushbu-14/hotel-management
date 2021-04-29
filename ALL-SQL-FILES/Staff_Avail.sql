@@ -22,7 +22,7 @@
             tname:='STAFF_AVAIL_DB';
             SELECT count(*) into nCount FROM user_tables where table_name = tname;
             IF(nCount > 0)
-            
+             
             THEN
                     DBMS_OUTPUT.PUT_LINE('TABLE '||TNAME || ' ALREADY EXISTS.');
             ELSE
