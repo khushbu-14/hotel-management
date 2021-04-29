@@ -15,19 +15,18 @@ end;
 exec update_email('johnny@gmail.com',8);
 exec update_email('abc@gmail.com',2);
 
-
 --select * from guest;
 
 set serveroutput on;
 
 create or replace 
-procedure  delete_location
-as
-begin
-dbms_output.put_line('Deleting Booking');
-delete from Location
-where location_id not in (select location_id from hotel);
-commit;
-dbms_output.put_line('Delete Complete');
-end;
+    procedure delete_location
+    as
+        begin
+             dbms_output.put_line('Deleting Location');
+        delete from Location
+            where location_id not in (select location_id from hotel);
+        commit;
+    dbms_output.put_line('Delete Complete');
+    end;
 /
