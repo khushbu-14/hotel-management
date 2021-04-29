@@ -2038,6 +2038,8 @@ CREATE OR REPLACE
      
 EXECUTE insrt_room_booking(1,2,2,4,5,2,2,2,TO_DATE('2021/04/28', 'YYYY-MM-DD'),TO_DATE('2021/05/03','YYYY-MM-DD'));
 EXECUTE insrt_room_booking(2,2,3,2,5,2,2,2,TO_DATE('2021/05/02', 'YYYY-MM-DD'),TO_DATE('2021/05/05','YYYY-MM-DD'));
+EXECUTE insrt_room_booking(3,1,3,2,5,2,1,1,TO_DATE('2021/04/25', 'YYYY-MM-DD'),TO_DATE('2021/04/30','YYYY-MM-DD'));
+EXECUTE insrt_room_booking(4,1,3,2,5,2,2,1,TO_DATE('2021/04/26', 'YYYY-MM-DD'),TO_DATE('2021/04/30','YYYY-MM-DD'));
 
 create or replace procedure checkin_creation is
     table_name varchar2(4000);

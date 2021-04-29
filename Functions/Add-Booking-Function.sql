@@ -240,6 +240,7 @@ SELECT TO_DATE('2021/05/03', 'YYYY-MM-DD') - TO_DATE('2021/04/28', 'YYYY-MM-DD')
                         TO_DATE('2021/05/03', 'YYYY-MM-DD') -- end date
                     );
      
+     EXECUTE insrt_room_booking(2,1,3,2,5,2,1,3,TO_DATE('2021/04/26', 'YYYY-MM-DD'),TO_DATE('2021/05/01','YYYY-MM-DD'));
 --EXECUTE insrt_room_booking(1,3 , 2,1,1500,3,2,1,2,'Y');  
 --EXECUTE insrt_room_booking(1,3 , 2,1,1500,3,2,1,2,'Y');
 --EXECUTE insrt_room_booking(1  ,1  , 5,1,1000,1,1,1,3,'Y');
