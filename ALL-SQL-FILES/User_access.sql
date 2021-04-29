@@ -1,31 +1,3 @@
-set serveroutput on;
-
-DECLARE nCount number;
-BEGIN 
-SELECT 
-  count(*) into nCount 
-FROM 
-  ALL_USERS 
-where 
-  USERNAME = 'FRONTDESK';
-IF(nCount > 0) THEN dbms_output.put_line('FRONTDESK USER ALREADY EXISTS');
-ELSE EXECUTE IMMEDIATE 'create user FRONTDESK identified by Database1234#';
-EXECUTE IMMEDIATE 'GRANT CREATE SESSION,CONNECT TO FRONTDESK';
-EXECUTE IMMEDIATE 'GRANT SELECT,UPATE,INSERT ON GUEST TO FRONTDESK';
-dbms_output.put_line('User created'|| username);
-END IF;
-EXCEPTION WHEN OTHERS THEN dbms_output.put_line(
-  dbms_utility.format_error_backtrace
-);
-dbms_output.put_line(SQLERRM);
-ROLLBACK;
-RAISE;
-COMMIT;
-END;
-/ 
-
-
-
 
 ---------------------------------------------------FrontDesk-----------------------------
 
@@ -35,6 +7,15 @@ grant connect to frontdesk;
 grant create session to frontdesk;
 grant unlimited tablespace to frontdesk;
 grant select,insert,update on ADMIN.guest to frontdesk;
+grant select,insert,update on ADMIN.room_booking to frontdesk;
+grant select,insert,update on ADMIN.preferences to frontdesk;
+grant select,insert,update on ADMIN.room to frontdesk;
+grant select on ADMIN.room_type to frontdesk;
+grant select on ADMIN.amenity to frontdesk;
+grant execute on get_booking_amount to frontdesk;
+grant execute on insrt_room_booking to frontdesk;
+GRANT SELECT ON guest_discount to frontdesk; 
+GRANT SELECT ON hotel_rates to frontdesk; 
 
 ----------------------------------------------------HouseKeeping----------------------------
 drop user housekeeping;
@@ -42,6 +23,10 @@ create user housekeeping identified by Database1234#;
 grant connect,resource to housekeeping;
 grant create session to housekeeping;
 grant unlimited tablespace to housekeeping;
+grant select,insert on admin.house_keeping to housekeeping;
+grant select,insert on admin.room_status to housekeeping;
+grant select,insert on admin.room to housekeeping;
+grant execute on insrt_house_keeping to housekeeping;
 
 ------------------------------------------------------Manager--------------------------------
 drop user manager;
@@ -49,45 +34,14 @@ create user manager identified by Database1234#;
 grant connect,resource to manager;
 grant create session to manager;
 grant unlimited tablespace to manager;
+grant select,insert,update on admin.guest to manager;
+grant select,insert,update on admin.annual_rate to manager;
+grant select,insert,update on admin.staff to manager;
+grant select,insert,update on admin.member to manager;
+grant select,insert,update on admin.preferences to manager;
+grant select,insert,update on admin.check_in to manager;
+grant select,insert,update on admin.discount to manager;
+grant select,insert,update on admin.department to manager;
+grant select on admin.designation to manager;
+grant select,insert,update on admin.amenity to manager;
 
--------------------------------------------------------Main_Admin
-drop user main_admin;
-create user main_admin identified by Database1234#;
-grant connect,resource to main_admin;
-grant create session to main_admin;
-grant unlimited tablespace to main_admin;
-
--------------------------------------------------------
-
-
-
-
-
-
-
----------------------------------Granting Priviliges to FrontDesk---------------------
-
-
-
-
-
------------------------------------------------------
-
-
-
-grant select,insert,update on house_keeping to housekeeping;
-
-
-Grant SELECT on guest to frontdesk;
-
-
-
---Alter user frontdesk password Datanight1234;
-
---connect session frontdesk Datanight1234;
-
-connect frontdesk
-
-select * from DBA_sys_privs
-where grantee='FRONTDESK'
-;
